@@ -17,7 +17,7 @@ ENV INST_SCRIPTS $STARTUPDIR/install
 ### Install Tools
 COPY ./install/ $INST_SCRIPTS/tools/
 RUN bash $INST_SCRIPTS/tools/install_tools.sh && \
-    bash $INST_SCRIPTS/tools/install_torbrowser.sh && \
+    bash $INST_SCRIPTS/tools/install_torbrowser.sh
 
 ######### End Customizations ###########
 
