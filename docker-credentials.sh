@@ -69,10 +69,6 @@ echo "${config_json}" | jq --arg credsStore pass '. + {credsStore: $credsStore}'
 echo "${config_filename}:"
 cat "${config_filename}" | jq
 
-# Help with entropy to prevent gpg2 full key generation hang
-# Feeds data from a random number generator to the kernel's random number entropy pool
-rngd -r /dev/urandom
-
 # To cleanup extras from multiple runs: gpg --delete-secret-key <key-id>; gpg --delete-key <key-id>
 echo "Generating GPG key, accept defaults but consider key size to 2048, supply user info"
 
