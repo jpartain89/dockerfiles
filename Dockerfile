@@ -1,6 +1,6 @@
 ARG BASE_TAG="develop"
 ARG BASE_IMAGE="core-ubuntu-focal"
-FROM kasmweb/$BASE_IMAGE:$BASE_TAG
+FROM kasmweb/core-ubuntu-focal:develop
 USER root
 
 ENV HOME /home/kasm-default-profile
