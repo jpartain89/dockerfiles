@@ -98,5 +98,5 @@ echo "Docker credential password list (empty initially):"
 
 docker-credential-pass list
 
-11echo "Done. Ready to test. Run: docker login <registry>"
+echo "Done. Ready to test. Run: docker login <registry>"
 echo "After login run: docker-credential-pass list; cat ~/.docker/config.json; pass show"
