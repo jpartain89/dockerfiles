@@ -1,6 +1,7 @@
 ARG BASE_TAG="develop"
 ARG BASE_IMAGE="core-ubuntu-focal"
 FROM kasmweb/core-ubuntu-focal:develop
+LABEL org.opencontainers.image.source="https://github.com/JPCDI/custom-kasm"
 USER root
 
 ENV HOME /home/kasm-default-profile
