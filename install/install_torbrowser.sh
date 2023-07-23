@@ -16,7 +16,6 @@ wget --quiet "${FULL_TOR_URL}" -O /tmp/torbrowser.tar.xz
 tar -xJf /tmp/torbrowser.tar.xz -C $TOR_HOME
 rm /tmp/torbrowser.tar.xz
 
-
 cp $TOR_HOME/tor-browser/start-tor-browser.desktop $TOR_HOME/tor-browser/start-tor-browser.desktop.bak
 cp $TOR_HOME/tor-browser/Browser/browser/chrome/icons/default/default128.png /usr/share/icons/tor.png
 chown 1000:0 /usr/share/icons/tor.png
@@ -77,7 +76,6 @@ mkdir -p /tmp/tor-browser/Browser/
 ln -s $TOR_HOME/tor-browser/start-tor-browser.desktop /tmp/tor-browser/Browser/start-tor-browser.desktop\
 
 chown -R 1000:0 $TOR_HOME/
-
 
 cp $TOR_HOME/tor-browser/start-tor-browser.desktop $HOME/Desktop/
 chown 1000:0  $HOME/Desktop/start-tor-browser.desktop
