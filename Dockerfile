@@ -1,6 +1,6 @@
 ARG BASE_TAG="develop"
 ARG BASE_IMAGE="core-ubuntu-focal"
-FROM kasmweb/core-ubuntu-focal:develop
+FROM kasmweb/core-ubuntu-focal:1.13.1-rolling
 LABEL org.opencontainers.image.source="https://github.com/jpartain89/custom-kasm"
 USER root
 
