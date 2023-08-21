@@ -2,7 +2,6 @@
 set -xe
 echo "Install TorBrowser"
 
-apt-get install -y xz-utils curl
 TOR_HOME=$HOME/tor-browser/
 mkdir -p $TOR_HOME
 if [ "$(arch)" == "aarch64" ]; then
@@ -15,7 +14,6 @@ fi
 wget --quiet "${FULL_TOR_URL}" -O /tmp/torbrowser.tar.xz
 tar -xJf /tmp/torbrowser.tar.xz -C $TOR_HOME
 rm /tmp/torbrowser.tar.xz
-
 
 cp $TOR_HOME/tor-browser/start-tor-browser.desktop $TOR_HOME/tor-browser/start-tor-browser.desktop.bak
 cp $TOR_HOME/tor-browser/Browser/browser/chrome/icons/default/default128.png /usr/share/icons/tor.png
@@ -44,10 +42,10 @@ user_pref("torbrowser.settings.quickstart.enabled", true);
 user_pref("browser.urlbar.matchOnlyTyped", true);
 user_pref("browser.xul.error_pages.expert_bad_cert", true);
 user_pref("media.autoplay.block-webaudio", true);
-user_pref(network.IDN_show_punycode", true);
+user_pref("network.IDN_show_punycode", true);
 user_pref("pdfjs.disabled", true);
 user_pref("privacy.trackingprotection.fingerprinting.enabled", true);
-user_pref(webgl.disabled", true);
+user_pref("webgl.disabled", true);
 user_pref("browser.cache.memory.enable", false);
 user_pref("browser.chrome.site_icons", false);
 user_pref("browser.shell.shortcutFavicons", false);
@@ -55,9 +53,9 @@ user_pref("dom.storage.enabled", false);
 user_pref("javascript.enabled", false);
 user_pref("media.webm.enabled", false);
 user_pref("network.prefetch-next", false);
-user_pref(network.websocket.delay-failed-reconnects", false);
+user_pref("network.websocket.delay-failed-reconnects", false);
 user_pref("pdfjs.enabledCache.state", false);
-user_pref("services.sync.prefs.sync.network.cookie.cookieBehavior, false);
+user_pref("services.sync.prefs.sync.network.cookie.cookieBehavior", false);
 user_pref("services.sync.prefs.sync.network.cookie.lifetimePolicy", false);
 user_pref("browser.cache.disk.enable", false);
 user_pref("browser.safebrowsing.downloads.remote.enabled", false);
@@ -77,7 +75,6 @@ mkdir -p /tmp/tor-browser/Browser/
 ln -s $TOR_HOME/tor-browser/start-tor-browser.desktop /tmp/tor-browser/Browser/start-tor-browser.desktop\
 
 chown -R 1000:0 $TOR_HOME/
-
 
 cp $TOR_HOME/tor-browser/start-tor-browser.desktop $HOME/Desktop/
 chown 1000:0  $HOME/Desktop/start-tor-browser.desktop

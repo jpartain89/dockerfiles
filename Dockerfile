@@ -15,10 +15,31 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV KASM_RX_HOME $STARTUPDIR/kasmrx
 ENV INST_SCRIPTS $STARTUPDIR/install
 
+RUN \
+    --mount=type=cache,target=/var/cache/apt \
+    apt-get update && apt-get install -y \
+        vlc \
+        git \
+        tmux \
+        gnupg2 \
+        gnupg-utils \
+        nano \
+        zip \
+        xdotool \
+        tar \
+        unrar \
+        xz-utils \
+        curl
+
 ### Install Tools
 COPY ./install/ $INST_SCRIPTS/tools/
-RUN bash $INST_SCRIPTS/tools/install_tools.sh && \
-    bash $INST_SCRIPTS/tools/install_torbrowser.sh
+RUN bash $INST_SCRIPTS/tools/install_torbrowser.sh
+
+RUN apt-get autoremove --purge -y \
+    xz-utils \
+    curl && \
+    apt-get autoclean && \
+    apt-get autoremove --purge -y
 
 ######### End Customizations ###########
 
