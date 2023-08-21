@@ -1,5 +1,7 @@
 FROM kasmweb/core-ubuntu-focal:1.13.1-rolling
 LABEL org.opencontainers.image.source="https://github.com/jpartain89/custom-kasm"
+LABEL org.opencontainers.image.description="Ubuntu Desktop with Tor Browser"
+LABEL org.opencontainers.image.licenses=MIT
 USER root
 
 ENV HOME /home/kasm-default-profile

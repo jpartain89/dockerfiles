@@ -59,7 +59,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4.6.0
         with:
-            images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+            images: jpartain89/kasm-ubuntu-desk-tor:main
             tags: |
               type=ref,event=branch
               type=ref,event=pr
@@ -72,6 +72,7 @@ jobs:
         uses: docker/build-push-action@v4.1.1
         with:
           context: .
+          platforms: linux/amd64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
