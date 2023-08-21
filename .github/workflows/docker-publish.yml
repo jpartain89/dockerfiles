@@ -59,7 +59,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4.6.0
         with:
-            images: jpartain89/kasm-ubuntu-desk-tor
+            images: jpartain89/kasm-ubuntu-desktop-vlc-tor
             tags: |
               type=ref,event=branch
               type=ref,event=pr
