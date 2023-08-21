@@ -35,10 +35,11 @@ RUN \
 COPY ./install/ $INST_SCRIPTS/tools/
 RUN bash $INST_SCRIPTS/tools/install_torbrowser.sh
 
-RUN apt-get autoremove --purge \
+RUN apt-get autoremove --purge -y \
     xz-utils \
     curl && \
-    apt-get autoclean
+    apt-get autoclean && \
+    apt-get autoremove --purge -y
 
 ######### End Customizations ###########
 
