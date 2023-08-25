@@ -93,3 +93,12 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+
+      - name: Trigger Next Repo
+        if: github.event_name != 'pull_request'
+        run: |
+          curl -X POST \
+          -H "Authorization: Bearer ${{ secrets.kasm }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/JPCDI/kasm-registry/actions/workflows/build-and-deploy.yml/dispatches \
+          -d '{"ref": "1.0"}'
