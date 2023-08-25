@@ -29,7 +29,8 @@ RUN \
         tar \
         unrar \
         xz-utils \
-        curl
+        curl \
+        cryptsetup
 
 ### Install Tools
 COPY ./install/ $INST_SCRIPTS/tools/
@@ -50,3 +51,4 @@ WORKDIR $HOME
 RUN mkdir -p $HOME && chown -R 1000:0 $HOME
 
 USER 1000
+
