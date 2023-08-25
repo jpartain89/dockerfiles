@@ -100,4 +100,4 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.kasm }}" \
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/repos/JPCDI/kasm-registry/actions/workflows/deploy.yml/dispatches \
-          -d '{"ref": "master"}'
+          -d '{"ref": "1.0"}'
