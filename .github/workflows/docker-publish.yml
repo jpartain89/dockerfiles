@@ -95,6 +95,7 @@ jobs:
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
       - name: Trigger Next Repo
+        if: github.event_name != 'pull_request'
         run: |
           curl -X POST \
           -H "Authorization: Bearer ${{ secrets.kasm }}" \
