@@ -80,8 +80,8 @@ jobs:
         with:
           export-env: true
         env:
-          PIA_USER: op://dev/PIA VPN/username
-          PIA_PASS: op://dev/PIA VPN/password
+          PIA_USER: "op://dev/PIA VPN/username"
+          PIA_PASS: "op://dev/PIA VPN/password"
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
