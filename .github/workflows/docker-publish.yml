@@ -65,21 +65,14 @@ jobs:
               type=ref,event=pr
               type=semver,pattern={{version}}
 
-      - name: Load PIA Credentials
-        id: load-pia-credentials
-        uses: 1password/load-secrets-action@v1
-        with:
-          export-env: true
-        env:
-          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          PIA_USER: op://dev/PIA VPN/username
-          PIA_PASS: op://dev/PIA VPN/password
-
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@v4.1.1
+        env:
+          PIA_USER: ${{ secrets.PIA_USER }}
+          PIA_PASS: ${{ secrets.PIA_PASS }}
         with:
           context: .
           platforms: linux/amd64
