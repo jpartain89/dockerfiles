@@ -30,17 +30,21 @@ RUN \
         unrar \
         xz-utils \
         curl \
-        cryptsetup
+        cryptsetup \
+        jq \
+        wireguard
 
 ### Install Tools
 COPY ./install/ $INST_SCRIPTS/tools/
 RUN bash $INST_SCRIPTS/tools/install_torbrowser.sh
+RUN bash $INST_SCRIPTS/tools/install_pia.sh
 
 RUN apt-get autoremove --purge -y \
-    xz-utils \
-    curl && \
+    xz-utils && \
+    apt-get clean && \
     apt-get autoclean && \
-    apt-get autoremove --purge -y
+    apt-get autoremove --purge -y && \
+    rm -rf /var/lib/apt/list/* | true
 
 ######### End Customizations ###########
 
