@@ -38,8 +38,8 @@ RUN \
 COPY ./install/ $INST_SCRIPTS/tools/
 RUN bash $INST_SCRIPTS/tools/install_torbrowser.sh
 
-RUN wget -q https://installers.privateinternetaccess.com/download/pia-linux-3.3.1-06924.run && \
-    sh pia-linux-3.3.1-06924.run
+COPY ./wg-config/* /etc/wireguard/wg0.conf
+RUN wg-quick up wg0
 
 RUN apt-get clean && \
     apt-get autoclean && \
