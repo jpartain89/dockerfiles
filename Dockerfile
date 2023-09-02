@@ -39,7 +39,7 @@ COPY ./install/ $INST_SCRIPTS/tools/
 RUN bash $INST_SCRIPTS/tools/install_torbrowser.sh
 
 RUN git clone https://github.com/pia-foss/manual-connections.git \
-    && VPN_PROTOCOL=wireguard \
+    && sh -c 'VPN_PROTOCOL=wireguard \
     DISABLE_IPV6=yes \
     DIP_TOKEN=no \
     AUTOCONNECT=true \
@@ -47,7 +47,7 @@ RUN git clone https://github.com/pia-foss/manual-connections.git \
     PIA_PF=false \
     PIA_DNS=true \
     PIA_USER=${PIA_USER} \
-    PIA_PASS=${PIA_PASS} ./manual-connections/run_setup.sh
+    PIA_PASS=${PIA_PASS} ./manual-connections/run_setup.sh'
 
 RUN apt-get autoremove --purge -y \
     xz-utils && \
