@@ -48,7 +48,7 @@ ENV PIA_DNS=true
 ENV PIA_USER=${PIA_USER}
 ENV PIA_PASS=${PIA_PASS}
 
-RUN git clone https://github.com/pia-foss/manual-connections.git \
+RUN git clone https://github.com/pia-foss/manual-connections.git && \
     sh -c "./manual-connections/run_setup.sh"
 
 RUN apt-get clean && \
