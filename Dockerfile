@@ -51,9 +51,7 @@ ENV PIA_PASS=${PIA_PASS}
 RUN git clone https://github.com/pia-foss/manual-connections.git \
     sh -c "./manual-connections/run_setup.sh"
 
-RUN apt-get autoremove --purge -y \
-    xz-utils && \
-    apt-get clean && \
+RUN apt-get clean && \
     apt-get autoclean && \
     apt-get autoremove --purge -y && \
     rm -rf /var/lib/apt/list/* | true
