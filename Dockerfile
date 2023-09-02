@@ -37,7 +37,9 @@ RUN \
 ### Install Tools
 COPY ./install/ $INST_SCRIPTS/tools/
 RUN bash $INST_SCRIPTS/tools/install_torbrowser.sh
-RUN bash $INST_SCRIPTS/tools/install_pia.sh
+
+RUN wget -q https://installers.privateinternetaccess.com/download/pia-linux-3.3.1-06924.run && \
+    sh pia-linux-3.3.1-06924.run
 
 RUN apt-get clean && \
     apt-get autoclean && \
