@@ -30,17 +30,20 @@ RUN \
         unrar \
         xz-utils \
         curl \
-        cryptsetup
+        cryptsetup \
+        jq \
+        sudo
 
 ### Install Tools
 COPY ./install/ $INST_SCRIPTS/tools/
 RUN bash $INST_SCRIPTS/tools/install_torbrowser.sh
 
-RUN apt-get autoremove --purge -y \
-    xz-utils \
-    curl && \
+COPY ./wg-config/* /etc/wireguard/wg0.conf
+
+RUN apt-get clean && \
     apt-get autoclean && \
-    apt-get autoremove --purge -y
+    apt-get autoremove --purge -y && \
+    rm -rf /var/lib/apt/list/* | true
 
 ######### End Customizations ###########
 
@@ -51,4 +54,3 @@ WORKDIR $HOME
 RUN mkdir -p $HOME && chown -R 1000:0 $HOME
 
 USER 1000
-
