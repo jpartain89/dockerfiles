@@ -37,19 +37,7 @@ RUN \
 ### Install Tools
 COPY ./install/ $INST_SCRIPTS/tools/
 RUN bash $INST_SCRIPTS/tools/install_torbrowser.sh
-
-ENV VPN_PROTOCOL=wireguard
-ENV DISABLE_IPV6=yes
-ENV DIP_TOKEN=no
-ENV AUTOCONNECT=true
-ENV PIA_CONNECT=true
-ENV PIA_PF=false
-ENV PIA_DNS=true
-ENV PIA_USER=${PIA_USER}
-ENV PIA_PASS=${PIA_PASS}
-
-RUN git clone https://github.com/pia-foss/manual-connections.git && \
-    sh -c "./manual-connections/run_setup.sh"
+RUN bash $INST_SCRIPTS/tools/install_pia.sh
 
 RUN apt-get clean && \
     apt-get autoclean && \
@@ -65,4 +53,3 @@ WORKDIR $HOME
 RUN mkdir -p $HOME && chown -R 1000:0 $HOME
 
 USER 1000
-
