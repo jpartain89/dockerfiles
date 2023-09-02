@@ -32,14 +32,13 @@ RUN \
         curl \
         cryptsetup \
         jq \
-        wireguard
+        sudo
 
 ### Install Tools
 COPY ./install/ $INST_SCRIPTS/tools/
 RUN bash $INST_SCRIPTS/tools/install_torbrowser.sh
 
 COPY ./wg-config/* /etc/wireguard/wg0.conf
-RUN wg-quick up wg0
 
 RUN apt-get clean && \
     apt-get autoclean && \
