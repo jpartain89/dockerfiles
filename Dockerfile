@@ -32,15 +32,16 @@ RUN \
         curl \
         cryptsetup \
         jq \
-        sudo && \
+        sudo \
+        openvpn \
+        unzip && \
         echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
-
 
 ### Install Tools
 COPY ./install/ $INST_SCRIPTS/tools/
 RUN bash $INST_SCRIPTS/tools/install_torbrowser.sh
 
-COPY ./wg-config/* /etc/wireguard/wg0.conf
+
 
 RUN apt-get clean && \
     apt-get autoclean && \
