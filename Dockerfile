@@ -32,16 +32,12 @@ RUN \
         curl \
         cryptsetup \
         jq \
-        sudo \
-        openvpn \
-        unzip && \
+        sudo && \
         echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 ### Install Tools
 COPY ./install/ $INST_SCRIPTS/tools/
 RUN bash $INST_SCRIPTS/tools/install_torbrowser.sh
-
-
 
 RUN apt-get clean && \
     apt-get autoclean && \
