@@ -36,8 +36,8 @@ RUN \
         echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 ### Install Tools
-COPY ./install/ $INST_SCRIPTS/tools/
-RUN bash $INST_SCRIPTS/tools/install_torbrowser.sh
+COPY ./install/ $INST_SCRIPTS/
+RUN bash $INST_SCRIPTS/install_torbrowser.sh
 
 RUN apt-get clean && \
     apt-get autoclean && \
