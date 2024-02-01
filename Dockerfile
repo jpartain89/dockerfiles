@@ -41,11 +41,6 @@ RUN \
         sudo && \
         echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-RUN apt-get clean && \
-    apt-get autoclean && \
-    apt-get autoremove --purge -y && \
-    rm -rf /var/lib/apt/list/* | true
-
 ### Install Tools
 COPY ./install/install_torbrowser.sh $INST_SCRIPTS/
 RUN bash $INST_SCRIPTS/install_torbrowser.sh
@@ -53,7 +48,7 @@ RUN bash $INST_SCRIPTS/install_torbrowser.sh
 ##### PIA VPN Repo
 RUN git clone https://github.com/pia-foss/manual-connections && \
     sudo PIA_USER=$PIA_USER PIA_PASS=$PIA_PASS PIA_PF=true PIA_DNS=true DISABLE_IPV6=yes \
-        PREFERRED_REGION=us_dallas VPN_PROTOCOL=wireguard ./manual-connection/run_setup.sh
+        PREFERRED_REGION=us_dallas VPN_PROTOCOL=wireguard ./manual-connections/run_setup.sh
 
 FROM builder AS final
 COPY --from=builder / /
