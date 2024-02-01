@@ -32,8 +32,7 @@ RUN \
         curl \
         cryptsetup \
         jq \
-        wireguard \
-        wireguard-tools \
+        openvpn \
         sudo && \
         echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
@@ -41,18 +40,18 @@ RUN \
 COPY ./install/install_torbrowser.sh ${INST_SCRIPTS}/
 RUN bash ${INST_SCRIPTS}/install_torbrowser.sh
 
-USER 1000
-##### PIA GUI VPN ######
-COPY ./install/pia-linux-3.5.3-07926.run ${INST_SCRIPTS}/
-RUN bash ${INST_SCRIPTS}/pia-linux-3.5.3-07926.run
+# Download PIA ovpn Files
+RUN cd /etc/openvpn && \
+wget https://www.privateinternetaccess.com/openvpn/openvpn.zip && \
+unzip openvpn.zip && \
+rm openvpn.zip
 
 FROM builder AS final
 COPY --from=builder / /
 
-USER root
 ######### End Customizations ###########
 
-RUN sudo chown 1000:0 $HOME
+RUN chown 1000:0 $HOME
 
 ENV HOME /home/kasm-user
 WORKDIR $HOME
