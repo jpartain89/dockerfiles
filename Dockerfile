@@ -36,8 +36,8 @@ RUN \
         curl \
         cryptsetup \
         jq \
-        wg-quick \
         wireguard \
+        wireguard-tools \
         sudo && \
         echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
