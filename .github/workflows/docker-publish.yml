@@ -66,6 +66,7 @@ jobs:
               type=semver,pattern={{version}}
 
       - name: Load secret
+        id: op
         uses: 1password/load-secrets-action@v1
         with:
           # Export loaded secrets as environment variables
@@ -83,8 +84,8 @@ jobs:
         with:
           context: .
           build-args: |
-            "PIA_USER=$op_PIA_USER"
-            "PIA_PASS=$op_PIA_PASS"
+            "PIA_USER=${{ steps.op.outputs.op_PIA_USER }}"
+            "PIA_PASS=${{ steps.op.outputs.op_PIA_PASS }}"
           platforms: linux/amd64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
