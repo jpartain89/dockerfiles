@@ -49,7 +49,7 @@ RUN bash $INST_SCRIPTS/install_torbrowser.sh
 RUN git clone https://github.com/pia-foss/manual-connections && \
     cd manual-connections && \
     sudo PIA_USER=$PIA_USER PIA_PASS=$PIA_PASS PIA_PF=true PIA_DNS=true DISABLE_IPV6=yes \
-        PREFERRED_REGION=us_texas VPN_PROTOCOL=wireguard DIP_TOKEN=no ./run_setup.sh
+        PREFERRED_REGION=us_south_west VPN_PROTOCOL=wireguard DIP_TOKEN=no ./run_setup.sh
 
 FROM builder AS final
 COPY --from=builder / /
