@@ -4,10 +4,6 @@ LABEL org.opencontainers.image.description="Ubuntu Desktop with Tor Browser"
 LABEL org.opencontainers.image.licenses=MIT
 USER root
 
-ARG PIA_USER
-ARG PIA_PASS
-ENV PIA_USER=$PIA_USER
-ENV PIA_PASS=$PIA_PASS
 ENV HOME /home/kasm-default-profile
 ENV STARTUPDIR /dockerstartup
 ENV INST_SCRIPTS $STARTUPDIR/install
@@ -42,14 +38,12 @@ RUN \
         echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 ### Install Tools
-COPY ./install/install_torbrowser.sh $INST_SCRIPTS/
-RUN bash $INST_SCRIPTS/install_torbrowser.sh
+COPY ./install/install_torbrowser.sh ${INST_SCRIPTS}/
+RUN bash ${INST_SCRIPTS}/install_torbrowser.sh
 
-##### PIA VPN Repo
-RUN git clone https://github.com/pia-foss/manual-connections && \
-    cd manual-connections && \
-    sudo PIA_USER=$PIA_USER PIA_PASS=$PIA_PASS PIA_PF=true PIA_DNS=true DISABLE_IPV6=yes \
-        PREFERRED_REGION=us_south_west VPN_PROTOCOL=wireguard DIP_TOKEN=no ./run_setup.sh
+##### PIA GUI VPN ######
+COPY ./install/pia-linux-3.5.3-07926.run ${INST_SCRIPTS}/
+RUN bash ${INST_SCRIPTS}/pia-linux-3.5.3-07926.run
 
 FROM builder AS final
 COPY --from=builder / /
