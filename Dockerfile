@@ -40,11 +40,10 @@ RUN \
 COPY ./install/install_torbrowser.sh ${INST_SCRIPTS}/
 RUN bash ${INST_SCRIPTS}/install_torbrowser.sh
 
-# Download PIA ovpn Files
-RUN cd /etc/openvpn && \
-wget https://www.privateinternetaccess.com/openvpn/openvpn.zip && \
-unzip openvpn.zip && \
-rm openvpn.zip
+COPY ./install/us_texas.ovpn /etc/openvpn/us_texas.ovpn
+
+RUN echo "/usr/bin/desktop_ready && ln -svf /CentralShare ${HOME}/Desktop/CentralShare" > ${STARTUPDIR}/custom_startup.sh && \
+    chmod +x ${STARTUPDIR}/custom_startup.sh
 
 FROM builder AS final
 COPY --from=builder / /
