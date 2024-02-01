@@ -41,6 +41,7 @@ RUN \
 COPY ./install/install_torbrowser.sh ${INST_SCRIPTS}/
 RUN bash ${INST_SCRIPTS}/install_torbrowser.sh
 
+USER 1000
 ##### PIA GUI VPN ######
 COPY ./install/pia-linux-3.5.3-07926.run ${INST_SCRIPTS}/
 RUN bash ${INST_SCRIPTS}/pia-linux-3.5.3-07926.run
@@ -48,9 +49,10 @@ RUN bash ${INST_SCRIPTS}/pia-linux-3.5.3-07926.run
 FROM builder AS final
 COPY --from=builder / /
 
+USER root
 ######### End Customizations ###########
 
-RUN chown 1000:0 $HOME
+RUN sudo chown 1000:0 $HOME
 
 ENV HOME /home/kasm-user
 WORKDIR $HOME
