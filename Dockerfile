@@ -1,4 +1,4 @@
-FROM kasmweb/core-ubuntu-focal:1.14.0-rolling
+FROM kasmweb/core-ubuntu-focal:1.14.0-rolling as builder
 LABEL org.opencontainers.image.source="https://github.com/jpartain89/dockerfiles"
 LABEL org.opencontainers.image.description="Ubuntu Desktop with Tor Browser"
 LABEL org.opencontainers.image.licenses=MIT
@@ -17,7 +17,7 @@ ENV INST_SCRIPTS $STARTUPDIR/install
 
 RUN \
     --mount=type=cache,target=/var/cache/apt \
-    apt-get update && apt-get install -y \
+    apt-get update && apt-get install -y --no-install-recommends \
         vlc \
         git \
         tmux \
@@ -32,17 +32,22 @@ RUN \
         curl \
         cryptsetup \
         jq \
+        openvpn \
         sudo && \
         echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 ### Install Tools
-COPY ./install/ $INST_SCRIPTS/
-RUN bash $INST_SCRIPTS/install_torbrowser.sh
+COPY ./install/install_torbrowser.sh ${INST_SCRIPTS}/
+RUN bash ${INST_SCRIPTS}/install_torbrowser.sh
 
-RUN apt-get clean && \
-    apt-get autoclean && \
-    apt-get autoremove --purge -y && \
-    rm -rf /var/lib/apt/list/* | true
+# Download PIA ovpn Files
+RUN cd /etc/openvpn && \
+wget https://www.privateinternetaccess.com/openvpn/openvpn.zip && \
+unzip openvpn.zip && \
+rm openvpn.zip
+
+FROM builder AS final
+COPY --from=builder / /
 
 ######### End Customizations ###########
 
