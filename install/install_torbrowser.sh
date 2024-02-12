@@ -72,7 +72,7 @@ EOL
 
 # Maintain backwards compatability with old image definitions that expect tor to be launched from /tmp
 mkdir -p /tmp/tor-browser/Browser/
-ln -s $TOR_HOME/tor-browser/start-tor-browser.desktop /tmp/tor-browser/Browser/start-tor-browser.desktop\
+ln -s $TOR_HOME/tor-browser/start-tor-browser.desktop /tmp/tor-browser/Browser/start-tor-browser.desktop
 
 chown -R 1000:0 $TOR_HOME/
 
