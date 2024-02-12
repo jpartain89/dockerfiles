@@ -43,7 +43,7 @@ RUN bash ${INST_SCRIPTS}/install_torbrowser.sh
 COPY ./install/us_texas.ovpn /etc/openvpn/us_texas.ovpn
 
 RUN echo "/usr/bin/desktop_ready && ln -svf /CentralShare ${HOME}/Desktop/CentralShare" > ${STARTUPDIR}/custom_startup.sh && \
-    echo "/usr/bin/desktop_ready && sudo xfce4-terminal -T OpenVPN -x openvpn /etc/openvpn/us_texas.ovpn" \
+    echo "/usr/bin/desktop_ready && sudo xfce4-terminal -T OpenVPN -x openvpn /etc/openvpn/us_texas.ovpn" >> ${STARTUPDIR}/custom_startup.sh && \
     chmod +x ${STARTUPDIR}/custom_startup.sh
 
 FROM builder AS final
