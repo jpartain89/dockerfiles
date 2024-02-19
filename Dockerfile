@@ -42,9 +42,6 @@ RUN bash ${INST_SCRIPTS}/install_torbrowser.sh
 RUN echo "/usr/bin/desktop_ready && ln -svf /CentralShare ${HOME}/Desktop/CentralShare" > ${STARTUPDIR}/custom_startup.sh && \
     chmod +x ${STARTUPDIR}/custom_startup.sh
 
-FROM builder AS final
-COPY --from=builder / /
-
 ######### End Customizations ###########
 
 RUN chown 1000:0 $HOME
