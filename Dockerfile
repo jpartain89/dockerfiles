@@ -1,4 +1,4 @@
-FROM kasmweb/core-ubuntu-focal:1.14.0-rolling as builder
+FROM kasmweb/ubuntu-focal-desktop-vpn:1.15.0 as builder
 LABEL org.opencontainers.image.source="https://github.com/jpartain89/dockerfiles"
 LABEL org.opencontainers.image.description="Ubuntu Desktop with Tor Browser"
 LABEL org.opencontainers.image.licenses=MIT
@@ -32,7 +32,6 @@ RUN \
         curl \
         cryptsetup \
         jq \
-        openvpn \
         sudo && \
         echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
@@ -40,14 +39,8 @@ RUN \
 COPY ./install/install_torbrowser.sh ${INST_SCRIPTS}/
 RUN bash ${INST_SCRIPTS}/install_torbrowser.sh
 
-COPY ./install/us_texas.ovpn /etc/openvpn/us_texas.ovpn
-
 RUN echo "/usr/bin/desktop_ready && ln -svf /CentralShare ${HOME}/Desktop/CentralShare" > ${STARTUPDIR}/custom_startup.sh && \
-    echo "/usr/bin/desktop_ready && sudo xfce4-terminal -T OpenVPN -x openvpn /etc/openvpn/us_texas.ovpn" \
     chmod +x ${STARTUPDIR}/custom_startup.sh
-
-FROM builder AS final
-COPY --from=builder / /
 
 ######### End Customizations ###########
 
