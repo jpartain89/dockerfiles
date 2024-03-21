@@ -83,9 +83,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          #build-args: |
-          #  "PIA_USER=${{ steps.op.outputs.op_PIA_USER }}"
-          #  "PIA_PASS=${{ steps.op.outputs.op_PIA_PASS }}"
           platforms: linux/amd64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
