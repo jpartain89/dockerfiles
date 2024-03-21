@@ -1,4 +1,4 @@
-FROM kasmweb/ubuntu-focal-desktop-vpn:1.15.0 as builder
+FROM kasmweb/ubuntu-focal-desktop-vpn:1.15.0-rolling as builder
 LABEL org.opencontainers.image.source="https://github.com/jpartain89/dockerfiles"
 LABEL org.opencontainers.image.description="Ubuntu Desktop with Tor Browser"
 LABEL org.opencontainers.image.licenses=MIT
@@ -17,7 +17,8 @@ ENV INST_SCRIPTS $STARTUPDIR/install
 
 RUN \
     --mount=type=cache,target=/var/cache/apt \
-    apt-get update && apt-get install -y --no-install-recommends \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
         vlc \
         git \
         tmux \
@@ -33,7 +34,7 @@ RUN \
         cryptsetup \
         jq \
         sudo && \
-        echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+        echo 'kasm-user ALL=(ALL) NOPASSWD: ALL' | tee -a /etc/sudoers.d/kasm-user
 
 ### Install Tools
 COPY ./install/install_torbrowser.sh ${INST_SCRIPTS}/
