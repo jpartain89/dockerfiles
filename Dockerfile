@@ -4,16 +4,16 @@ LABEL org.opencontainers.image.description="Ubuntu Desktop with Tor Browser"
 LABEL org.opencontainers.image.licenses=MIT
 USER root
 
-ENV HOME /home/kasm-default-profile
-ENV STARTUPDIR /dockerstartup
-ENV INST_SCRIPTS $STARTUPDIR/install
+ENV HOME=/home/kasm-default-profile
+ENV STARTUPDIR=/dockerstartup
+ENV INST_SCRIPTS=$STARTUPDIR/install
 WORKDIR $HOME
 
 ######### Customize Container Here ###########
 ### Envrionment config
-ENV DEBIAN_FRONTEND noninteractive
-ENV KASM_RX_HOME $STARTUPDIR/kasmrx
-ENV INST_SCRIPTS $STARTUPDIR/install
+ENV DEBIAN_FRONTEND=noninteractive
+ENV KASM_RX_HOME=$STARTUPDIR/kasmrx
+ENV INST_SCRIPTS=$STARTUPDIR/install
 
 RUN \
     --mount=type=cache,target=/var/cache/apt \
@@ -48,7 +48,7 @@ RUN echo "/usr/bin/desktop_ready && \
 
 RUN chown 1000:0 $HOME
 
-ENV HOME /home/kasm-user
+ENV HOME=/home/kasm-user
 WORKDIR $HOME
 RUN mkdir -p $HOME && chown -R 1000:0 $HOME
 
