@@ -1,4 +1,4 @@
-FROM kasmweb/ubuntu-noble-desktop-vpn:1.16.1-rolling-weekly as builder
+FROM kasmweb/ubuntu-focal-desktop-vpn:1.16.1-rolling-weekly as builder
 LABEL org.opencontainers.image.source="https://github.com/jpartain89/dockerfiles"
 LABEL org.opencontainers.image.description="Ubuntu Desktop with Tor Browser"
 LABEL org.opencontainers.image.licenses=MIT
